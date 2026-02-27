@@ -1,8 +1,10 @@
 package com.stephennnamani.productdisplay.presentation.state
 
+import com.stephennnamani.productdisplay.domain.model.Product
+
 sealed interface ProductUiState {
     data object Idle: ProductUiState
     data object Loading: ProductUiState
-    data object Success: ProductUiState
+    data class Success(val products: List<Product>): ProductUiState
     data class Error(val message: String): ProductUiState
 }
