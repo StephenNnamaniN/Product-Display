@@ -1,10 +1,13 @@
 package com.stephennnamani.productdisplay
 
 import com.stephennnamani.productdisplay.domain.model.Product
+import com.stephennnamani.productdisplay.domain.result.AppError
 import com.stephennnamani.productdisplay.domain.result.AppResult
 import com.stephennnamani.productdisplay.domain.usecase.GetProductUseCase
 import com.stephennnamani.productdisplay.presentation.state.ProductUiState
 import com.stephennnamani.productdisplay.presentation.viewmodel.ProductViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -30,5 +33,14 @@ class ProductViewModelTest {
         viewModel.fetchProducts()
 
         assertEquals(ProductUiState.Success(products), viewModel.uiState.value)
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun `emits Loading then Error when use case fails`() = runTest {
+        fakeRepository.result = AppResult.Failure(AppError.NetworkError)
+        viewModel.fetchProducts()
+        advanceUntilIdle()
+        assertEquals(ProductUiState.Error("Something went wrong"), viewModel.uiState.value)
     }
 }

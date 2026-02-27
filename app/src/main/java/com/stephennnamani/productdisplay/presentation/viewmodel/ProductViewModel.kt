@@ -25,7 +25,7 @@ class ProductViewModel(
                     _uiState.value = ProductUiState.Success(result.data)
 
                 is AppResult.Failure ->
-                    _uiState.value = ProductUiState.Error("Something wen wrong")
+                    _uiState.value = ProductUiState.Error("Something went wrong")
             }
         }
     }
