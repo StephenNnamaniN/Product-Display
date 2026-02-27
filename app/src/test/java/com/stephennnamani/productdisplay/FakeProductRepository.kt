@@ -6,7 +6,7 @@ import com.stephennnamani.productdisplay.domain.result.AppResult
 
 class FakeProductRepository : ProductRepository {
 
-    val result: AppResult<List<Product>> =
+    var result: AppResult<List<Product>> =
         AppResult.Success(emptyList())
 
     override suspend fun getProducts(): AppResult<List<Product>> {
