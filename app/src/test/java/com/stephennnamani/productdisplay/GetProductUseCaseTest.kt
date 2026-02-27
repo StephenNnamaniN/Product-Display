@@ -1,6 +1,7 @@
 package com.stephennnamani.productdisplay
 
 import com.stephennnamani.productdisplay.domain.model.Product
+import com.stephennnamani.productdisplay.domain.result.AppError
 import com.stephennnamani.productdisplay.domain.result.AppResult
 import com.stephennnamani.productdisplay.domain.usecase.GetProductUseCase
 import kotlinx.coroutines.test.runTest
@@ -29,5 +30,13 @@ class GetProductUseCaseTest {
         val result = useCase()
 
         assertEquals(AppResult.Success(products), result)
+    }
+
+    @Test
+    fun `returns failure when repository returns failure`() = runTest {
+        fakeRepository.result = AppResult.Failure(AppError.NetworkError)
+
+        val result = useCase()
+        assertEquals(AppResult.Failure(AppError.NetworkError), result)
     }
 }
