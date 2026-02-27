@@ -4,6 +4,7 @@ import com.stephennnamani.productdisplay.domain.model.Product
 import com.stephennnamani.productdisplay.domain.result.AppResult
 import com.stephennnamani.productdisplay.domain.usecase.GetProductUseCase
 import com.stephennnamani.productdisplay.presentation.state.ProductUiState
+import com.stephennnamani.productdisplay.presentation.viewmodel.ProductViewModel
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
